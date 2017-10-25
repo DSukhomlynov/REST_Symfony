@@ -1,0 +1,21 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+    token_authenticator:
+        class: UserBundle\Security\TokenAuthenticator
+        arguments: ['@lexik_jwt_authentication.jwt_encoder', '@doctrine.orm.entity_manager']
+
+    my_user_manager:
+        class: UserBundle\Service\MyUserManager
+        arguments:
+                - '@fos_user.util.password_updater'
+                - '@fos_user.util.canonical_fields_updater'
+                - '@doctrine.orm.default_entity_manager'
+                - '%fos_user.model.user.class%'
+    app.form.registration:
+            class: UserBundle\Form\RegistrationType
+            tags:
+                - { name: form.type, alias: app_user_registration }
