@@ -54,7 +54,7 @@ class OrderController extends FOSRestController
      */
     public function postAction(Request $request)
     {
-        //Метод добавления заказа
+        //Метод добавления заказа. Мне показалось странным, что передается 16 методов а используется 8, поэтому обработал на свое усмотрение.
         $data = new Order;
         $itinerary = new Itinerary;
 
